@@ -654,7 +654,9 @@ void redrawMainSettings() {
         case 4: lcd.print(rtc.getMonth()); break;
         case 5: lcd.print(rtc.getYear()); break;
         case 6: lcd.print(settings.comSensPeriod); break;
+#if (USE_PLOTS == 1)        
         case 7: lcd.print(plotNames[settings.plotMode]); break;
+#endif
 #if (SMOOTH_SERVO == 1)
         case 8: lcd.print(settings.srv1_Speed); break;
         case 9: lcd.print(settings.srv1_Acc, 1); break;

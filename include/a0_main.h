@@ -4,23 +4,23 @@
 #include <Arduino.h>
 
 //============ Includes ====================
-#include "a1_data.h"
-#include "a2_setup.h"
-#include "a3_loop.h"
-#include "a4_func.h"
-#include "arrowControl.h"
-#include "automatics.h"
-#include "custom.h"
-#include "drive.h"
-#include "e0_eprom.h"
-#include "encMinim.h"
-#include "menu.h"
-#include "pid.h"
-#include "pid_tuner.h"
-#include "pwmrelay.h"
-#include "redrawScreen.h"
-#include "sensors.h"
-#include "service.h"
+// #include "a1_data.h"
+// #include "a2_setup.h"
+// #include "a3_loop.h"
+// #include "a4_func.h"
+// #include "arrowControl.h"
+// #include "automatics.h"
+// #include "custom.h"
+// #include "drive.h"
+// #include "e0_eprom.h"
+// #include "encMinim.h"
+// #include "menu.h"
+// #include "pid.h"
+// #include "pid_tuner.h"
+// #include "pwmrelay.h"
+// #include "redrawScreen.h"
+// #include "sensors.h"
+// #include "service.h"
 
 // ================== СИСТЕМА ==================
 #define START_MENU 0          // 1 - включить, 0 - отключить стартовое меню (старт с нажатой кнопкой). Там будет сервис и сброс настроек
@@ -64,18 +64,7 @@
 
 // ============== НАЗВАНИЯ КАНАЛОВ =============
 // (только английские буквы)
-const char *channelNames[] = {
-  "Channel 1",
-  "Channel 2",
-  "Channel 3",
-  "Channel 4",
-  "Channel 5",
-  "Channel 6",
-  "Channel 7",
-  "Servo 1",
-  "Servo 2",
-  "Drive",
-};
+// extern const char *channelNames[];
 
 // ================== ДАТЧИКИ ==================
 // ------------------ MH-Z19 -------------------

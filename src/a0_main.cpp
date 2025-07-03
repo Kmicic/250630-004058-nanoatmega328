@@ -1,15 +1,16 @@
-#include <a0_main.h>
-// #include "a1_data.h"
-// #include "EEPROM.h"
+#include "a0_main.h"
 
-/*
-  Скетч к проекту "Универсальный контроллер"
-  Страница проекта (схемы, описания): https://alexgyver.ru/gyvercontrol/
-  Исходники на GitHub: https://github.com/AlexGyver/gyvercontrol
-  Нравится, как написан и закомментирован код? Поддержи автора! https://alexgyver.ru/support_alex/
-  Автор: AlexGyver Technologies, 2020
-  http://AlexGyver.ru/
-*/
-// Версия 1.6
-// Версия 1.6.2 - добавлена поддержка HTU21D (заменяет BME280)
 
+
+// const char *channelNames[] = {
+//   "Channel 1",
+//   "Channel 2",
+//   "Channel 3",
+//   "Channel 4",
+//   "Channel 5",
+//   "Channel 6",
+//   "Channel 7",
+//   "Servo 1",
+//   "Servo 2",
+//   "Drive",
+// };

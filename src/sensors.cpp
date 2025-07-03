@@ -1,8 +1,10 @@
 #include <sensors.h>
 // заполнение массива значений с датчиков
 // здесь можно прописать свой датчик!
+#include <Arduino.h>
 
 
+int analogReadAverage(byte pin, byte samples = 10);
 
 void getAllData() {
   sensorVals[0] = 0;
@@ -40,10 +42,10 @@ sensorVals[1] = aht20.getHumidity();
 
   sensorVals[1] = constrain(sensorVals[1], 0, 99);
 
-  sensorVals[2] = analogReadAverage(SENS_1) / 4;
-  sensorVals[3] = analogReadAverage(SENS_2) / 4;
-  sensorVals[4] = analogReadAverage(SENS_3) / 4;
-  sensorVals[5] = analogReadAverage(SENS_4) / 4;
+  sensorVals[2] = analogReadAverage(SENS_1,10) / 4;
+  sensorVals[3] = analogReadAverage(SENS_2,10) / 4;
+  sensorVals[4] = analogReadAverage(SENS_3,10) / 4;
+  sensorVals[5] = analogReadAverage(SENS_4,10) / 4;
 
 #if (DALLAS_SENS1 == 1)
 #if (DALLAS_AMOUNT > 1)

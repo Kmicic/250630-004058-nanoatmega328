@@ -164,7 +164,7 @@ void drawArrow() {
   }
 }
 
-void smartArrow(bool state) {  // рисует стрелку, галку или пробел
+void smartArrow(bool state=true) {  // рисует стрелку, галку или пробел
   lcd.write(state ? (controlState ? 62 : 126) : 32);
 }
 

@@ -2,12 +2,13 @@
 #define A3_LOOP_H
 
 //============ Includes ====================
-//#include "a1_data.h"
+#include "a0_main.h"
+#include "a1_data.h"
 #include "custom.h"
 #include "pid.h"
-//#include "a4_func.h"
 #include "menu.h"
 #include "redrawScreen.h"
+#include "automatics.h"
 
 // void controlTick();
 void readAllSensors();

@@ -3,6 +3,7 @@
 
 //============ Includes ====================
 #include "a1_data.h"
+#include "a0_main.h"
 
 void getDay();  // получить номер дня
 void timersTick();   // каждую секунду

@@ -3,7 +3,6 @@
 
 //============ Includes ====================
 #include "a1_data.h"
-int analogReadAverage(byte pin, byte samples = 10);
+#include <Arduino.h>
 
-//============ Added by Convertor ==========
 #endif // SENSORS_H

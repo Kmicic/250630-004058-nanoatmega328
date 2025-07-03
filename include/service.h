@@ -1,8 +1,11 @@
 #ifndef SERVICE_H
 #define SERVICE_H
-#include <Arduino.h>
+
 //============ Includes ====================
 #include "a1_data.h"
+#include "a0_main.h"
+
+#include <Arduino.h>
 
 void serviceTick();    // выполняем при каждом тике
 void serviceIN();      // выполняем при входе в сервис 

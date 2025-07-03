@@ -22,6 +22,8 @@
 #define FAST_TURN 1           // 1 - вкл быстрый поворот
 #define FAST_TURN_STEP 10     // изменение при быстром повороте
 
+
+
 class encMinim
 {
   public:
@@ -118,5 +120,7 @@ void encMinim::tick(bool hold) {
     _swFlag = false;
   }
 }
+
+extern encMinim enc;
 
 #endif // ENCMINIM_H_

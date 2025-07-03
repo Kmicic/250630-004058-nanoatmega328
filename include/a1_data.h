@@ -2,18 +2,19 @@
 #define A1_DATA_H
 
 #include <Arduino.h>
-#include <a0_main.h>
-#include <a2_setup.h>
-#include <a3_loop.h>
-#include <a4_func.h>
-#include <arrowControl.h>
-#include <automatics.h>
-#include <custom.h>
-#include <drive.h>
-#include <e0_eprom.h>
-#include <encMinim.h>
+// #include "a0_main.h"
+// #include "a2_setup.h"
+// #include "a3_loop.h"
+// #include "a4_func.h"
+// #include "arrowControl.h"
+// #include "automatics.h"
+// #include "custom.h"
+// #include "drive.h"
+// #include "e0_eprom.h"
+// #include "encMinim.h"
+// #include <ServoSmooth.h>
 
-#include <automatics.h>
+// #include <automatics.h>
 // -------------------- PINY ---------------------
 #define SW        0
 #define RELAY_0   1
@@ -105,7 +106,8 @@
 
 // -------------------- Biblioteki ---------------------
 #include "encMinim.h"
-encMinim enc(CLK, DT, SW, ENC_REVERSE, ENCODER_TYPE);
+//extern encMinim enc(CLK, DT, SW, ENC_REVERSE, ENCODER_TYPE);
+extern encMinim enc;
 
 #if (SERVO1_RELAY == 0 || SERVO2_RELAY == 0)
 #if (SMOOTH_SERVO == 1)
@@ -117,38 +119,39 @@ encMinim enc(CLK, DT, SW, ENC_REVERSE, ENCODER_TYPE);
 
 #if (SERVO1_RELAY == 0)
 #if (SMOOTH_SERVO == 1)
-ServoSmooth servo1;
+extern ServoSmooth servo1;
 #else
-Servo servo1;
+extern Servo servo1;
 #endif
 #endif
 
 #if (SERVO2_RELAY == 0)
 #if (SMOOTH_SERVO == 1)
-ServoSmooth servo2;
+extern ServoSmooth servo2;
 #else
-Servo servo2;
+extern Servo servo2;
 #endif
 #endif
 
-#include <a0_main.h>
 #include <microWire.h>
 #include <microLiquidCrystal_I2C.h>
 
 // Define the I2C address for your LCD (commonly 0x27 or 0x3F)
 #define LCD_ADDR 0x27
 
-LiquidCrystal_I2C lcd(LCD_ADDR, 20, 4);
+//extern LiquidCrystal_I2C lcd(LCD_ADDR, 20, 4);
+
+extern LiquidCrystal_I2C lcd;
 
 #include <EEPROM.h>
 
 #include <microDS3231.h>
-MicroDS3231 rtc;
+extern MicroDS3231 rtc;
 
 // bme
 #if (USE_BME == 1)
 #include <GyverBME280.h>
-GyverBME280 bme;
+extern GyverBME280 bme;
 #endif
 
 #if (USE_ADAFRUIT_SENSOR == 1)
@@ -158,8 +161,8 @@ GyverBME280 bme;
 #include <Adafruit_BMP280.h>
 
 // Create sensor instances
-Adafruit_AHTX0 aht;
-Adafruit_BMP280 bmp; // Default I2C address is 0x77
+extern Adafruit_AHTX0 aht;
+extern Adafruit_BMP280 bmp; // Default I2C address is 0x77
 
 #endif
 
@@ -186,19 +189,19 @@ HTU21D myHTU21D(HTU21D_RES_RH12_TEMP14);
 #if (USE_BMP280 == 1)
 #include <BMP280.h>
 //#include <Adafruit_BMP280.h>
-BMP280 bmp280;
+extern BMP280 bmp280;
 #endif
 
 #if (USE_AHT20 == 1)
 #include <AHT20.h>
-AHT20 aht20;
+extern AHT20 aht20;
 #endif
 
 #if (WDT_ENABLE == 1)
 #include <avr/wdt.h>
 #endif
 // -------------------- ПЕРЕМЕННЫЕ ---------------------
-int8_t lastScreen = 0;
+extern int8_t lastScreen;
 
 // struktura shedule
 #if (SCHEDULE_NUM > 0)
@@ -277,9 +280,11 @@ bool flag0, flag1;
 
 // Settings
 #define SETTINGS_AMOUNT 8
+
 #if (SMOOTH_SERVO == 1)
 #define SETTINGS_AMOUNT 12
 #endif
+
 #if (PID_AUTOTUNE == 1)
 #define SETTINGS_AMOUNT 19
 #endif
@@ -357,62 +362,62 @@ struct channelsStruct {
   uint32_t weekOff = 10;       // week off
 };
 // 32
-channelsStruct activeChannel, setChannel;
+extern channelsStruct activeChannel, setChannel;
 
 #define loadChannel(x) channelsStruct(EEPROM.get((x) * EEPR_CH_STEP, activeChannel))
 
-uint32_t timerMillis[10];       // milisecond counter
+extern uint32_t timerMillis[10];       // milisecond counter
 
-uint32_t driveTimer;
-byte driveState;
-boolean lastDriveState;
-boolean manualControl;
-boolean manualPos;
-boolean controlState;
+extern uint32_t driveTimer;
+extern byte driveState;
+extern boolean lastDriveState;
+extern boolean manualControl;
+extern boolean manualPos;
+extern boolean controlState;
 
 const byte PIDchs[] = {0, 1, 2, 3, 7, 8, 9};
 const byte channelToPWM[] = {0, 1, 2, 3, 0, 0, 0, 4, 5, 6};  // channel to pwm
 const byte impulsePrds[] = {1, 5, 10, 15, 20, 30, 1, 2, 3, 4, 6, 8, 12, 1, 2, 3, 4, 5, 6, 7};
 const byte relayPins[] = {RELAY_0, RELAY_1, RELAY_2, RELAY_3, RELAY_4, RELAY_5, RELAY_6, SERVO_0, SERVO_1};
 
-float sensorVals[7];    // sensors ...
-int8_t realTime[3];
-float uptime = 0;
-byte servoPosServ[2];
+extern float sensorVals[7];    // sensors ...
+extern int8_t realTime[3];
+extern float uptime;
+extern byte servoPosServ[2];
 #define PWM_RELAY_HZ 1        // частота ШИМ для каналов ШИМ-реле, Гц (раз в секунду) можно десятичные дроби (0.1 - период будет 10 секунд)
 const int PWMperiod = (float)1000 / PWM_RELAY_HZ;
-int PWMactive[2];
+extern int PWMactive[2];
 
-int pwmVal[7];   // drive movement time for PID
-boolean drivePidFlag; // drive movement for PID flag
+extern int pwmVal[7];   // drive movement time for PID
+extern boolean drivePidFlag; // drive movement for PID flag
 
-boolean channelStates[10];
-boolean channelStatesServ[10];
-int8_t debugPage;
+extern boolean channelStates[10];
+extern boolean channelStatesServ[10];
+extern int8_t debugPage;
 
-int8_t arrowPos;  // 0-3
-int8_t navDepth;  // 0-2
+extern int8_t arrowPos;  // 0-3
+extern int8_t navDepth;  // 0-2
 extern int8_t currentChannel;  // -3 - 14
-int8_t currentMode; // 0-3
-int8_t thisH[2], thisM[2], thisS[2];
-int8_t currentLine;
+extern int8_t currentMode; // 0-3
+extern int8_t thisH[2], thisM[2], thisS[2];
+extern int8_t currentLine;
 extern uint32_t commonTimer, backlTimer, plotTimer;
-boolean backlState = true;
+extern boolean backlState;
 
-int sensMinute[6][15];
+extern int sensMinute[6][15];
 
-boolean serviceFlag;
-boolean startPID = false;
-boolean timeChanged;
-boolean startFlagDawn;
-uint32_t settingsTimer;
-uint32_t driveTout;
+extern boolean serviceFlag;
+extern boolean startPID;
+extern boolean timeChanged;
+extern boolean startFlagDawn;
+extern uint32_t settingsTimer;
+extern uint32_t driveTout;
 
-byte thisMode;
-byte curMode;
+extern byte thisMode;
+extern byte curMode;
 
-const byte daysMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, 0};
-uint16_t thisDay;
+extern const byte daysMonth[];
+extern uint16_t thisDay;
 
 #if (START_MENU == 1)
 bool startService = false;
@@ -467,113 +472,27 @@ void CO2tick() {
 }
 #endif
 
-const char *settingsPageNames[]  = {
-  "A-BKL",
-  "BKL-time",
-  "Drv",
-  "Day",
-  "Month",
-  "Year",
-  "Sens prd",
-  "Plot prd",
-#if (SMOOTH_SERVO == 1)
-  "S1 sp",
-  "S1 acc",
-  "S2 sp",
-  "S2 acc",
-#endif
-#if (PID_AUTOTUNE == 1)
-  "Tuner",
-  "Result",
-  "Channel",
-  "Sensor",
-  "Manual",
-  "Steady",
-  "Step",
-  "Window",
-  "Kick time",
-  "Delay",
-  "Period",
-#endif
-};
+extern const char *settingsPageNames[];
 
 #if (USE_PID == 1)
-const char *pidNames[] = {
-  "P",
-  "I",
-  "D",
-  "Sens",
-  "Set",
-  "T",
-  "Min",
-  "Max",
-};
+extern const char *pidNames[];
 #endif
+
 #if (USE_DAWN == 1)
-const char *dawnNames[]  = {
-  "Start",
-  "Dur. up",
-  "Stop",
-  "Dur. down",
-  "Min",
-  "Max",
-};
+extern const char *dawnNames[];
 #endif
-const char *settingsNames[]  = {
-  "Mode",
-  "Direction",
-  "Type",
 
-  "Mode",
-  "Direction",
-  "Limits",
+extern const char *settingsNames[];
 
-  "Mode",
-  "Direct.",
-  "Timeout",
-};
+extern const char *modeNames[];
 
-const char *modeNames[]  = {
-  "<Timer>",
-  "<Timer RTC>",
-  "<Week>",
-  "<Sensor>",
-  "<PID>",
-  "<Dawn>",
-};
+extern const char *relayNames[];
 
-const char *relayNames[]  = {
-  "Relay",
-  "Valve",
-  "Common",
-};
+extern const char *modeSettingsNames[];
 
-const char *modeSettingsNames[]  = {
-  "Period",   // 0
-  "Work",     // 1
-  "Left",     // 2
+extern const char *channelNames[];
 
-  "Period",   // 3
-  "Work",     // 4
-  "Start hour", // 5
-
-  "",    // 6
-  "",     // 7
-
-  "Period",   // 8
-  "Sensor",   // 9
-  //"Threshold",  // 10
-};
-
-
-const char *directionNames[]  = {
-  "Off-On",
-  "On-Off",
-  "Min-Max",
-  "Max-Min",
-  "Close-Open",
-  "Open-Close",
-};
+extern const char *directionNames[];
 
 // sensors names
 #define SENS1_NAME "Sen1"
@@ -606,24 +525,11 @@ const char *directionNames[]  = {
 #endif
 #endif
 
-const char *sensorNames[]  = {
-  "AirT",
-  "AirH",
+extern const char *sensorNames[];
 
-  SENS1_NAME,
-  SENS2_NAME,
-  SENS3_NAME,
-  SENS4_NAME,
-  "AirP"
-};
-
-//#if (USE_PLOTS == 1)
-const char *plotNames[]  = {
-  "Min",
-  "Hour",
-  "Day",
-};
-//#endif
+#if (USE_PLOTS == 1)
+extern const char *plotNames[];
+#endif
 
 // harmful functions
 void smartArrow(bool state);

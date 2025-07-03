@@ -13,9 +13,9 @@ void recalculateTime();
 
 
 //============ Includes ====================
-// #include "a0_main.h"
-// #include "a1_data.h"
-// #include "a4_func.h"
+#include "a0_main.h"
+#include "a1_data.h"
+#include "a4_func.h"
 void correctTime();
 
 
